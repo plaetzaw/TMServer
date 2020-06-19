@@ -1,20 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
+let SALT = 15;
 let db = require("../models");
-let bcrypt = require("bcrypt");
-let SALT = 69;
-// const jwt = require("jsonwebtoken");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/register", (req, res) => {
-  res.send("register");
-});
-
 router.post("/register", (req, res) => {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
+  let firstname = req.body.firstName;
+  let lastname = req.body.lastName;
   let email = req.body.email;
   let password = req.body.password;
   db.user
@@ -25,8 +20,9 @@ router.post("/register", (req, res) => {
     })
     .then((user) => {
       if (user) {
-        console.log("email already exists");
-        res.status(500).json({ message: "Email is already in use" });
+        console.log("email already exists"); // MUST INCLUDE A RESPONSE FOR THE SERVER TO REPLY TO THE CLIENT WITH
+        // make sure you return a res from the server to kill this process. Console logging does not kill the process
+        res.status(500).json({ message: "Email already exists" });
       } else {
         db.user
           .findOne({
@@ -34,22 +30,30 @@ router.post("/register", (req, res) => {
               email: email,
             },
           })
-          .then(() => {
-            bcrypt.hash(password, SALT).then((hash) => {
-              console.log("HASHing Password...");
-              let user = db.user.build({
-                firstName: firstName,
-                lastName: lastName,
-                password: hash,
-                email: email,
-              });
+          .then((user2) => {
+            console.log("looking for email...");
+            if (user2) {
+              console.log("email already exists");
+              res.status(500).json({ message: "email already exists" });
+              // make sure you return a res from the server to kill this process. Console logging does not kill the process
+            } else {
+              bcrypt.hash(password, SALT).then((hash) => {
+                console.log("hashing password....");
+                let user = db.user.build({
+                  firstname: firstname,
+                  lastname: lastname,
+                  email: email,
+                  password: hash,
+                });
 
-              user
-                .save()
-                .then(() =>
-                  res.status(200).json({ message: "New User Created" })
-                );
-            });
+                user
+                  .save()
+                  .then(() =>
+                    res.status(200).json({ message: "New user created!" })
+                  )
+                  .catch((err) => console.error(err));
+              });
+            }
           });
       }
     });
