@@ -8,8 +8,8 @@ let db = require("../models");
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/register", (req, res) => {
-  let firstname = req.body.firstName;
-  let lastname = req.body.lastName;
+  let firstName = req.body.firstName;
+  let lastName = req.body.lastName;
   let email = req.body.email;
   let password = req.body.password;
   db.user
@@ -40,8 +40,8 @@ router.post("/register", (req, res) => {
               bcrypt.hash(password, SALT).then((hash) => {
                 console.log("hashing password....");
                 let user = db.user.build({
-                  firstname: firstname,
-                  lastname: lastname,
+                  firstName: firstName,
+                  lastName: lastName,
                   email: email,
                   password: hash,
                 });
