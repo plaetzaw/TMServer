@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       taskTitle: DataTypes.STRING,
       taskDescription: DataTypes.STRING,
       taskCompleted: DataTypes.BOOLEAN,
+      assignedTo: DataTypes.INTEGER,
+      assignedBy: DataTypes.INTEGER,
     },
     {}
   );
