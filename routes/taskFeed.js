@@ -3,8 +3,6 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
 const db = require("../models");
-// let db = require("../models");
-// let bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +18,7 @@ router.get("/taskFeed", (req, res) => {
         {
           model: db.user,
           required: true,
-          attributes: ["taskTitle", "taskDescription", "taskCompleted"],
+          attributes: ["taskTitle", "taskDescription"],
         },
       ],
     })
