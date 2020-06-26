@@ -12,14 +12,20 @@ router.get("/createTask", (req, res) => {
 });
 
 router.post("/createTask", (req, res) => {
-  let user = req.body.id;
+  let userID = req.body.userID;
   let taskTitle = req.body.taskTitle;
   let taskDescription = req.body.taskDescription;
+  let taskCompleted = req.body.taskCompleted;
+  let assignedBy = req.body.assignedBy;
+  let assignedTo = req.body.assignedTo;
 
   let task = db.tasks.build({
-    userId: user,
+    userID: userID,
     taskTitle: taskTitle,
     taskDescription: taskDescription,
+    taskCompleted: taskCompleted,
+    assignedBy: assignedBy,
+    assignedTo: assignedTo,
   });
   task
     .save()

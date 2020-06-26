@@ -13,17 +13,9 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.get("/taskFeed", (req, res) => {
   db.tasks
-    .findAll({
-      include: [
-        {
-          model: db.user,
-          required: true,
-          attributes: ["taskTitle", "taskDescription"],
-        },
-      ],
-    })
+    .findAll()
     .then((tasks) => {
-      res.json(tasks);
+      res.status(200).json(tasks);
     })
     .catch((err) => {
       console.error(err);
