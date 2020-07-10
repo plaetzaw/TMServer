@@ -11,6 +11,7 @@ router.get("/createTask", (req, res) => {
   res.send("createTask");
 });
 
+// Create a new task
 router.post("/createTask", (req, res) => {
   let userID = req.body.userID;
   let taskTitle = req.body.taskTitle;
@@ -36,6 +37,14 @@ router.post("/createTask", (req, res) => {
     .catch((err) => {
       console.error(err);
     });
+});
+
+// Edit an existing task
+router.patch("/createTask", (req, res) => {
+  let userID = req.body.userID;
+  db.user.find({
+    where: { userID: userID },
+  }).then;
 });
 
 module.exports = router;
