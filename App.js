@@ -4,14 +4,18 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 
+require("dotenv").config();
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(require("./routes/login"));
+const { authUser } = require("./utility/auth");
+
+app.use(require("./routes/login", authUser));
 app.use(require("./routes/register"));
-app.use(require("./routes/taskFeed"));
-app.use(require("./routes/createTask"));
+app.use(require("./routes/taskFeed", authUser));
+app.use(require("./routes/createTask", authUser));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
