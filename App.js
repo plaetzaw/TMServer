@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 require("dotenv").config();
 
@@ -16,6 +16,7 @@ app.use(require("./routes/login", authUser));
 app.use(require("./routes/register"));
 app.use(require("./routes/taskFeed", authUser));
 app.use(require("./routes/createTask", authUser));
+app.use(require("./routes/userTaskFeed"));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

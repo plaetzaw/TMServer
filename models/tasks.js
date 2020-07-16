@@ -3,18 +3,16 @@ module.exports = (sequelize, DataTypes) => {
   const tasks = sequelize.define(
     "tasks",
     {
-      taskTitle: DataTypes.STRING,
-      taskDescription: DataTypes.STRING,
-      taskCompleted: DataTypes.BOOLEAN,
-      assignedTo: DataTypes.INTEGER,
-      assignedBy: DataTypes.INTEGER,
+      tasktitle: DataTypes.STRING,
+      taskdescription: DataTypes.STRING,
+      taskcompletion: DataTypes.BOOLEAN,
       userID: DataTypes.INTEGER,
+      assignedby: DataTypes.INTEGER,
     },
     {}
   );
   tasks.associate = function (models) {
-    // associations can be defined here
-    models.tasks.belongsTo(models.user);
+    models.tasks.belongsTo(models.users);
   };
   return tasks;
 };

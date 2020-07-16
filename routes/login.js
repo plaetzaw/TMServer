@@ -14,7 +14,7 @@ router.post("/login", (req, res) => {
   let password = req.body.password;
   console.log(password);
 
-  db.user
+  db.users
     .findOne({
       where: {
         email: email,

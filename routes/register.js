@@ -8,11 +8,11 @@ let db = require("../models");
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/register", (req, res) => {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
   let email = req.body.email;
   let password = req.body.password;
-  db.user
+  db.users
     .findOne({
       where: {
         email: email,
@@ -24,7 +24,7 @@ router.post("/register", (req, res) => {
         // make sure you return a res from the server to kill this process. Console logging does not kill the process
         res.status(500).json({ message: "Email already exists" });
       } else {
-        db.user
+        db.users
           .findOne({
             where: {
               email: email,
@@ -39,9 +39,9 @@ router.post("/register", (req, res) => {
             } else {
               bcrypt.hash(password, SALT).then((hash) => {
                 console.log("hashing password....");
-                let user = db.user.build({
-                  firstName: firstName,
-                  lastName: lastName,
+                let user = db.users.build({
+                  firstname: firstname,
+                  lastname: lastname,
                   email: email,
                   password: hash,
                 });

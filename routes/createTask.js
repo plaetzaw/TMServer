@@ -14,19 +14,17 @@ router.get("/createTask", (req, res) => {
 // Create a new task
 router.post("/createTask", (req, res) => {
   let userID = req.body.userID;
-  let taskTitle = req.body.taskTitle;
-  let taskDescription = req.body.taskDescription;
-  let taskCompleted = req.body.taskCompleted;
-  let assignedBy = req.body.assignedBy;
-  let assignedTo = req.body.assignedTo;
+  let tasktitle = req.body.tasktitle;
+  let taskdescription = req.body.taskdescription;
+  let taskcompletion = req.body.taskcompletion;
+  let assignedby = req.body.assignedby;
 
   let task = db.tasks.build({
     userID: userID,
-    taskTitle: taskTitle,
-    taskDescription: taskDescription,
-    taskCompleted: taskCompleted,
-    assignedBy: assignedBy,
-    assignedTo: assignedTo,
+    tasktitle: tasktitle,
+    taskdescription: taskdescription,
+    taskcompletion: taskcompletion,
+    assignedby: assignedby,
   });
   task
     .save()
@@ -42,7 +40,7 @@ router.post("/createTask", (req, res) => {
 // Edit an existing task
 router.patch("/createTask", (req, res) => {
   let userID = req.body.userID;
-  db.user.find({
+  db.users.find({
     where: { userID: userID },
   }).then;
 });

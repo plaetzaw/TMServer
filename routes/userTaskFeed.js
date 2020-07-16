@@ -7,18 +7,23 @@ const db = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-// router.get("/taskFeed", (req, res) => {
-//   res.send("taskFeed");
-// });
-
-router.get("/taskFeed", (req, res) => {
-  db.tasks
-    .findAll()
+router.get("/userTaskFeed", (req, res) => {
+  db.users
+    .findOne({
+      where: {
+        id: req.user.id,
+      },
+      include: [
+        {
+          model: db.tasks,
+        },
+      ],
+    })
     .then((tasks) => {
       res.status(200).json(tasks);
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
     });
 });
 
