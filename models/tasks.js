@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   tasks.associate = function (models) {
-    models.tasks.belongsTo(models.users);
+    models.tasks.belongsTo(models.users, {
+      as: "users",
+      foreignKey: "id",
+    });
   };
   return tasks;
 };

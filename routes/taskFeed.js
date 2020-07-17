@@ -7,10 +7,6 @@ const db = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-// router.get("/taskFeed", (req, res) => {
-//   res.send("taskFeed");
-// });
-
 router.get("/taskFeed", (req, res) => {
   db.tasks
     .findAll()

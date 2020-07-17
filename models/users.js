@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   users.associate = function (models) {
-    models.users.hasMany(models.tasks);
+    models.users.hasMany(models.tasks, {
+      as: "users",
+      foreignKey: "id",
+    });
   };
   return users;
 };

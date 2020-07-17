@@ -7,17 +7,12 @@ const db = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/userTaskFeed", (req, res) => {
-  db.users
-    .findOne({
+router.post("/userTaskFeed", (req, res) => {
+  db.tasks
+    .findAll({
       where: {
-        id: req.user.id,
+        assignedto: req.body.assignedto,
       },
-      include: [
-        {
-          model: db.tasks,
-        },
-      ],
     })
     .then((tasks) => {
       res.status(200).json(tasks);

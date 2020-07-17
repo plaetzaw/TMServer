@@ -45,3 +45,5 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// https://stackoverflow.com/questions/47080727/error-on-sequelize-import-definecall-is-not-a-function
