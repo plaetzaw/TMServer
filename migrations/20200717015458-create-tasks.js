@@ -8,16 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tasktitle: {
+      taskname: {
         type: Sequelize.STRING
       },
       taskdescription: {
         type: Sequelize.STRING
       },
-      taskcompletion: {
+      taskcompleted: {
         type: Sequelize.BOOLEAN
       },
-      userID: {
+      assignedto: {
         type: Sequelize.INTEGER
       },
       assignedby: {

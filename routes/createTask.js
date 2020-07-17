@@ -13,14 +13,14 @@ router.get("/createTask", (req, res) => {
 
 // Create a new task
 router.post("/createTask", (req, res) => {
-  let userID = req.body.userID;
+  let assignedto = req.body.assignedto;
   let tasktitle = req.body.tasktitle;
   let taskdescription = req.body.taskdescription;
   let taskcompletion = req.body.taskcompletion;
   let assignedby = req.body.assignedby;
 
   let task = db.tasks.build({
-    userID: userID,
+    assignedto: assignedto,
     tasktitle: tasktitle,
     taskdescription: taskdescription,
     taskcompletion: taskcompletion,

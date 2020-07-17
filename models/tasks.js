@@ -3,10 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   const tasks = sequelize.define(
     "tasks",
     {
-      tasktitle: DataTypes.STRING,
+      taskname: DataTypes.STRING,
       taskdescription: DataTypes.STRING,
-      taskcompletion: DataTypes.BOOLEAN,
-      userID: DataTypes.INTEGER,
+      taskcompleted: DataTypes.BOOLEAN,
+      assignedto: DataTypes.INTEGER,
       assignedby: DataTypes.INTEGER,
     },
     {}
