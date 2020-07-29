@@ -5,15 +5,11 @@ const db = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.post("/userTaskFeed", (req, res) => {
-  db.tasks
-    .findAll({
-      where: {
-        assignedto: req.body.assignedto,
-      },
-    })
-    .then((tasks) => {
-      res.status(200).json(tasks);
+router.post("/allUsers", (req, res) => {
+  db.users
+    .findAll()
+    .then((users) => {
+      res.status(200).json(users);
     })
     .catch((err) => {
       console.log(err);

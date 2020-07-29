@@ -16,7 +16,8 @@ app.use(require("./routes/login", authUser));
 app.use(require("./routes/register"));
 app.use(require("./routes/taskFeed", authUser));
 app.use(require("./routes/createTask", authUser));
-app.use(require("./routes/userTaskFeed"));
+app.use(require("./routes/userTaskFeed", authUser));
+app.use(require("./routes/allUsers", authUser));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
