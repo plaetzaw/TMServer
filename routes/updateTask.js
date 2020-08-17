@@ -15,30 +15,29 @@ router.post("/updateTask", (req, res) => {
 
   console.log(id);
 
-  db.tasks.findOne({
-    where: {
-      id: id,
-    },
-  });
-
-  let updatedTask = db.tasks.build({
-    id: id,
-    taskname: taskname,
-    taskdescription: taskdescription,
-    taskcompleted: taskcompleted,
-    assignedto: assignedto,
-    assignedby: assignedby,
-  });
-
-  updatedTask
-    .save()
-    .then(() => {
-      console.log("Updating task in the datatbase");
-      res.sendStatus(200);
+  db.tasks
+    .findOne({
+      where: {
+        id: id,
+      },
     })
-    .catch((err) => {
-      console.error(err);
-    });
+    .then((persistPost) => {
+      console.log("Found an existing task, beginning update");
+      persistPost.taskname = taskname;
+      persistPost.taskdescription = taskdescription;
+      persistPost.taskcompleted = taskcompleted;
+      persistPost.assignedto = assignedto;
+      persistPost.assignedby = assignedby;
+
+      persistPost
+        .save()
+        .then(() => {
+          console.log("Updated task in the database");
+          res.sendStatus(200);
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.error(err));
 });
 
 module.exports = router;
