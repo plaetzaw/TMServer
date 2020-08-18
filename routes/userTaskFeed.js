@@ -5,11 +5,14 @@ const db = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.post("/userTaskFeed", (req, res) => {
+router.get("/userTaskFeed", (req, res) => {
+  let assignedto = req.body.assignedto;
+
+  console.log("executing userTaskFeed route");
   db.tasks
     .findAll({
       where: {
-        assignedto: req.body.assignedto,
+        assignedto: assignedto,
       },
     })
     .then((tasks) => {
