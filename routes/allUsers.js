@@ -7,7 +7,8 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/allUsers", (req, res) => {
   db.users
-    .findAll({ attributes: ["firstname", "lastname"] })
+    .findAll({ attributes: ["lastname"] })
+    // .findAll({ attributes: ["firstname", "lastname"] })
     .then((users) => {
       res.status(200).json(users);
     })
