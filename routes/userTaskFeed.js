@@ -7,8 +7,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/userTaskFeed", (req, res) => {
   console.log("executing userTaskFeed route");
-  console.log(req.body);
-  console.log(req.body.assignedto);
   let assignedto = req.body.assignedto;
   console.log(assignedto);
 
